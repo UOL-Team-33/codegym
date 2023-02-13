@@ -1,0 +1,89 @@
+.error {
+  width: 2px;
+  height: 20px;
+  background-color: lightcoral;
+  /* color: red; */
+}
+
+.code-char {
+  /*color: lightslategray;*/
+}
+
+.current {
+  width: 2px;
+  height: 20px;
+  background-color: lightgray;
+  animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+  0% { background-color: lightgray; }
+  50% { background-color: lightyellow; }
+  100% { background-color: lightgray; }
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black */
+  z-index: 2; /* ensure it's on top of other elements */
+}
+
+.overlay-text {
+  color: rgb(0, 0, 0); /* or any other color */
+  font-size: 5em; /* or any other size */
+  text-align: center;
+  animation: intro 1s linear infinite;
+}
+
+@keyframes intro {
+  0% { color: lightgray; }
+  50% { color: lightyellow; }
+  100% { color: lightgray; }
+}
+
+#debug {
+  margin-top: 200px;
+  background: white;
+  padding:20px;
+  color: black;
+}
+
+.stats-container {
+  min-height: 200px;
+  padding: 50px 0;
+}
+.stats-container.light {
+  background: #d6d6d2;
+  color: black;
+}
+.stats-container.dark {
+  background: #151515;
+  color: white;
+}
+
+.code-container {
+  height: auto;
+  min-height: 200px;
+  padding: 50px 0;
+}
+
+.code-container.dark {
+  background: #333741;
+  color: white;
+}
+.code-container.light {
+  background: #efefef;
+  color: black;
+}
+
+.code-container pre {
+  border-radius: 0.5em;
+  border: .3em solid hsl(0, 0%, 33%)
+}
