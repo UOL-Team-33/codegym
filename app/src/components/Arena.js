@@ -2,15 +2,10 @@ import Prism from 'prismjs';
 import Hands from "./Hands";
 import augment_code from "./helpers/utils";
 import React, { useRef, useState, useEffect } from 'react';
-import {CHAR_CLASSNAME, CURRENT_CLASSNAME, DEFAULT_STATE, ERROR_CLASSNAME, GameState} from "./constants";
-import Stats from "./Stats";
-import {loadFile} from "./helpers/loadCode";
-// import parseCode from "./helpers/parseCode";
-
-import 'prismjs/themes/prism.css';
+import {CHAR_CLASSNAME, CURRENT_CLASSNAME, ERROR_CLASSNAME, GameState} from "./constants";
+import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-python';
-import 'prismjs/components/prism-css';
 
 const Arena = ({
                    gameState,
@@ -34,7 +29,6 @@ const Arena = ({
     const handleKeyDown = (event) => {
         event.preventDefault();
         const currentKey = event.key;
-        console.log("HERERERER")
 
         if (ready === GameState.Started) {
             if (['Shift', 'Alt', 'AltGraph', 'Control', 'ContextMenu',
@@ -60,8 +54,21 @@ const Arena = ({
                 setCurrentCharIndex(index - 1)
 
             } else {
+                let correct_char = charsToType[index]
                 let char_success = charsToType[index] === currentKey;
+
+                if (correct_char.match(/\r/)) {
+                    if (currentKey == "Enter") char_success = true
+                }
+                if (correct_char.match(/\n/)) {
+                    if (currentKey == "Enter") char_success = true
+                }
+                if (correct_char.match(/\t/)) {
+                    if (currentKey == "Tab") char_success = true
+                }
+
                 move_current(curr, next, char_success);
+
 
                 setCurrentChar(charsToType[index+1])
                 setCurrentCharIndex(index + 1)
@@ -77,10 +84,6 @@ const Arena = ({
             }
         } else {
             if (currentKey === 'Enter') {
-                console.log("not")
-                console.log(ready)
-                console.log(currentKey)
-
                 setReady(GameState.Started)
                 onGameStateChange(GameState.Started)
             }

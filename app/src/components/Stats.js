@@ -2,8 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Col, Container, Row} from "react-bootstrap";
 
 const Stats = ({ ready, stats }) => {
-    const [statsCorrect, setStatsCorrect] = useState(0);
-    const [statsWrong, setStatsWrong] = useState(0);
     const [elapsedTime, setElapsedTime] = useState(0);
     const [accuracy, setAccuracy] = useState(0);
     const [progress, setProgress] = useState(0);
@@ -13,15 +11,15 @@ const Stats = ({ ready, stats }) => {
 
         if (ready) {
             const intervalId = setInterval(() => {
+                let time = elapsedTime
+                console.log(elapsedTime)
                 setElapsedTime((prevElapsedTime) => prevElapsedTime + 1);
-            }, 1000);
+            }, 1100);
         }
         return () => clearInterval(intervalId);
     }, [ready]);
 
     useEffect(() => {
-        setStatsCorrect(stats.correct)
-        setStatsWrong(stats.wrong)
         setAccuracy(stats_accuracy())
         setProgress(stats_progress())
     }, [stats]);
@@ -33,42 +31,38 @@ const Stats = ({ ready, stats }) => {
     };
 
     const stats_accuracy = () => {
-        let accuracy = ((100 - (stats.wrong * 100) / stats.charsTypedLength).toFixed(2));
+        let accuracy = ((100 - (stats.wrong * 100) / stats.charsTypedLength).toFixed(0));
+        if (isNaN(accuracy)) return 0
         return accuracy;
     };
 
     const stats_progress = () => {
-        let progress = ((stats.maxIndex * 100) / stats.charsToTypeLength).toFixed(2);
+        let progress = Math.floor((stats.charsTypedLength / Math.ceil(elapsedTime / 60 )).toFixed(2));
+
+        if (isNaN(progress)) return 0
         return progress;
     };
 
   return (
           <Container>
               <Row >
-                  <Col>
-                      <h1>Accuracy</h1>
-                      {accuracy}
-                  </Col>
-                  <Col>
-                      <h1>Timer</h1>
-                      {formatTime(elapsedTime)}
-                  </Col>
-                  <Col>
-                      <h1>Progress</h1>
-                      {progress}
+                  <Col className='d-flex align-items-center justify-content-center'>
+                      <div className='d-flex align-items-center flex-column justify-content-center'>
+                          <div className='stats-timer'>
+                              {formatTime(elapsedTime)}
+                          </div>
+                          <div className='d-flex align-items-center justify-content-around w-100'>
+                              <div className='stats-wpm'>
+                                  {progress} CPM
+                              </div>
+                              <div className='stats-accuracy'>
+                                  {accuracy}% ACC
+                              </div>
+                          </div>
+
+                      </div>
                   </Col>
               </Row>
-              {/*<div id='stats'>*/}
-              {/*    <div className='timer'>{timer}</div>*/}
-              {/*    <div className='wpm-acc'>*/}
-              {/*        <div className='wpm' title='Words Per Minute'>*/}
-              {/*            {wpm}% <small>wpm</small>*/}
-              {/*        </div>*/}
-              {/*        <div className='acc' title='Accuracy'>*/}
-              {/*            {accuracy}% <small>accuracy</small>*/}
-              {/*        </div>*/}
-              {/*    </div>*/}
-              {/*</div>*/}
           </Container>
   );
 }

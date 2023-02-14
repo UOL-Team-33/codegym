@@ -1,16 +1,11 @@
 import './App.css';
-import CodeArea from "./components/CodeArea";
 import "./css/prism.css";
-import Toolbar from "./components/Toolbar";
 import Stats from "./components/Stats";
-import CodeInput from "./components/CodeInput";
 import Arena from "./components/Arena";
 import React, {useEffect, useState} from "react";
-import Prism from "prismjs";
-import {DEFAULT_STATE, GameState, LANGUAGES} from "./components/constants";
+import {GameState, LANGUAGES} from "./components/constants";
 import {loadFile} from "./components/helpers/loadCode";
-import augment_code from "./components/helpers/utils";
-import {Button, Col, Container, Form, Nav, Navbar, Row} from "react-bootstrap";
+import {Button, Col, Container, Form, InputGroup, Row} from "react-bootstrap";
 
 
 let code = `const highlight = (code, errorIndex = -1) => {
@@ -30,11 +25,17 @@ const App = () => {
     const [arenaKey, setArenaKey] = useState(1);
     const [uploadedFile, setUploadedFile] = useState(null);
     const [rawCode, setRawCode] = useState('');
-    const [theme, setTheme] = useState('prism');
+    const [theme, setTheme] = useState('prism-tomorrow');
     const [fontSize, setFontSize] = useState(16);
     const [language, setLanguage] = useState('javascript');
     const [darkUiActive, setDarkUiActive] = useState(true);
-    const [stats, setStats] = useState({accuracy:100, timer:0, progress:0, correct:0, wrong:0});
+    const [stats, setStats] = useState({
+        timer:0,
+        correct:0,
+        wrong:0,
+        charsToTypeLength: 0,
+        charsTypedLength: 0,
+    });
 
     const handleStatsChange = (stats) => {
         setStats(stats)
@@ -134,46 +135,75 @@ const App = () => {
 
 
     return (
-    <div className="App d-flex flex-column justify-content-between align-items-stretch vh-100">
+    <div className={"code-gym " + (darkUiActive? "dark": "light") +" d-flex flex-column justify-content-between align-items-stretch vh-100"}>
 
-        <Navbar bg={darkUiActive? "dark": "light"} variant={darkUiActive? "dark": "light"}>
-            <Container>
-                <Navbar.Brand href="#home">CODE GYM</Navbar.Brand>
-                <Form className="">
-                    <Row className="d-flex flex-row align-items-center">
-                        <Col sm={3}>
-                            <Form.Control id='file-upload' onChange={handleFileUpload} type="file" size="sm" />
+        <Container className="code-navbar">
+                <Row className="d-flex flex-row align-items-center justify-content-between h-100">
+                    <Col className='code-navbar-logo flex-grow-0'>
+                        CODE GYM
+                    </Col>
+
+                    <Col className='code-navbar-settings d-flex justify-content-end'>
+                        <Col className='code-navbar-file flex-grow-0'>
+                            <InputGroup size='sm' >
+                                <InputGroup.Text>
+                                   <span className="material-symbols-sharp">publish</span>
+                                </InputGroup.Text>
+                                <Form.Control id='file-upload' onChange={handleFileUpload} type="file" size="sm" />
+                            </InputGroup>
                         </Col>
-                        <Col sm={2}>
-                            <Form.Select id='font-select' value={fontSize} onChange={handleFontSizeChange} aria-label="Default select example" size="sm">
-                                <option value="16">Font 16</option>
-                                <option value="18">18</option>
-                                <option value="20">20</option>
-                                <option value="22">22</option>
-                                <option value="24">24</option>
-                            </Form.Select>
+                        <Col className='code-navbar-font flex-grow-0' >
+                            <InputGroup size='sm' >
+                                <InputGroup.Text>
+                                    <span className="material-symbols-sharp">format_size</span>
+                                </InputGroup.Text>
+                                <Form.Select id='font-select' value={fontSize} onChange={handleFontSizeChange} aria-label="Default select example" size="sm">
+                                    <option value="16">16</option>
+                                    <option value="18">18</option>
+                                    <option value="20">20</option>
+                                    <option value="22">22</option>
+                                    <option value="24">24</option>
+                                </Form.Select>
+                            </InputGroup>
                         </Col>
-                        <Col sm={2}>
-                            <Form.Select id='theme-select' value={theme} onChange={handleThemeChange} aria-label="Default select example" size="sm">
-                                <option value="prism">Theme Prism</option>
-                                <option value="prism-okaidia">Okaidia</option>
-                                <option value="prism-tomorrow">Tomorrow</option>
-                                <option value="prism-twilight">Twilight</option>
-                            </Form.Select>
+                        <Col className='code-navbar-theme flex-grow-0'>
+                            <InputGroup size='sm' >
+                                <InputGroup.Text>
+                                    <span className="material-symbols-sharp">palette</span>
+                                </InputGroup.Text>
+                                <Form.Select id='theme-select' value={theme} onChange={handleThemeChange} aria-label="Default select example" size="sm">
+                                    <option value="prism">Prism</option>
+                                    <option value="prism-okaidia">Okaidia</option>
+                                    <option value="prism-tomorrow">Tomorrow</option>
+                                    <option value="prism-twilight">Twilight</option>
+                                </Form.Select>
+                            </InputGroup>
                         </Col>
-                        <Col sm={3}>
-                            <Form.Select id='language-select' value={language} onChange={handleLanguageChange} aria-label="Default select example" size="sm">
-                                <option value="javascript">Language JavaScript</option>
-                                <option value="python">Python</option>
-                            </Form.Select>
+                        <Col className='code-navbar-language flex-grow-0'>
+                            <InputGroup size='sm' >
+                                <InputGroup.Text>
+                                    <span className="material-symbols-sharp">language</span>
+                                </InputGroup.Text>
+                                <Form.Select id='language-select' value={language} onChange={handleLanguageChange} aria-label="Default select example" size="sm">
+                                    <option value="javascript">JavaScript</option>
+                                    <option value="python">Python</option>
+                                </Form.Select>
+                            </InputGroup>
                         </Col>
-                        <Col sm={2}>
-                            <Button  onClick={handleDarkUiActiveChange} variant={darkUiActive? 'light': 'dark'}>{darkUiActive ? "Light UI" : "Dark UI"}</Button>
+                        <Col className='code-navbar-ui flex-grow-0'>
+
+                            {/*<Button className='material-icons '  size='sm' onClick={handleDarkUiActiveChange} variant={darkUiActive? 'light': 'dark'}>{darkUiActive ? "Light UI" : "Dark UI"}</Button>*/}
+                            <Button size='sm' onClick={handleDarkUiActiveChange} variant={darkUiActive? 'light': 'dark'}>
+                                {darkUiActive?
+                                    <span style={{fontSize: '18px'}} className="material-symbols-sharp">light_mode</span>
+                                    :
+                                    <span style={{fontSize: '18px'}} className="material-symbols-sharp">dark_mode</span>
+                                }
+                            </Button>
                         </Col>
-                    </Row>
-                </Form>
-            </Container>
-        </Navbar>
+                    </Col>
+                </Row>
+        </Container>
         <Container className={'stats-container ' + (darkUiActive? 'dark': 'light')} fluid>
             <Stats ready={gameState} stats={stats}></Stats>
         </Container>
@@ -191,10 +221,8 @@ const App = () => {
                 ></Arena>
             </Container>
         </Container>
-        <footer  style={{height: '80px', color:'white', background: '#151515'}}>
-            <span>Some text</span>
-            TODO: tabs, indented code, returns not showing, key sounds, stats UI, code scroll
-        </footer>
+        {/*<footer  style={{height: '80px', color:'white', background: '#151515'}}>*/}
+        {/*</footer>*/}
     </div>
   );
 }

@@ -4,10 +4,23 @@ function parse_string(content, chars_list) {
     let content_copy = [];
     for (let i = 0; i < content.length; i++) {
         let char = content[i];
+        let classList = ' '
+        // console.log('888888888888888888888888888888888888888888888')
+        // if (codeObj.character === '\n') {
+       if (char.match(/\r/)) {
+           classList += ' enter'
+       }
+        if (char.match(/\n/)) {
+            classList += ' enter'
+        }
+        if (char.match(/\t/)) {
+            classList += ' tab'
+        }
+
         if (chars_list.length == 0) {
-            content_copy.push(`<span class="code-char ${CURRENT_CLASSNAME}" id='char-${chars_list.length}'>${char}</span>`)
+            content_copy.push(`<span class="code-char ${CURRENT_CLASSNAME} ${classList}" + id='char-${chars_list.length}'>${char}</span>`)
         } else {
-            content_copy.push(`<span class="code-char" id='char-${chars_list.length}'>${char}</span>`)
+            content_copy.push(`<span class="code-char ${classList}" id='char-${chars_list.length}'>${char}</span>`)
         }
         chars_list.push(char)
     }

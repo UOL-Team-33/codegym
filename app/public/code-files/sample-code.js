@@ -1,4 +1,8 @@
-const tsOptions = { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.React };
+function testFunction(error) {
+	if (error.file) {
+		const message = ts.flattenDiagnosticMessageText(error.messageText, '\n');
+	}
+}
 
 let a = (a,b) => a + b
 let b = (a,b) => a + b
