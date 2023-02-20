@@ -159,7 +159,7 @@ const Arena = ({
           style={{ fontSize: `${fontSize}px` }}
         >
           <code
-            className={language_map[language]}
+            className={language_map[language] + " " + getGameStateClass(ready)}
             ref={containerRef}
             dangerouslySetInnerHTML={{ __html: formattedCode }}
           />

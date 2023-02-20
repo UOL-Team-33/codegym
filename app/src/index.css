@@ -94,7 +94,11 @@ pre[class*="language-"] {
   border: .3em solid hsl(0, 0%, 33%)
 }
 
-.gamestate-ready::after {
+code.gamestate-ready {
+  filter: blur(5px);
+}
+
+pre.gamestate-ready::after {
   /* backdrop-filter: blur(10px); */
   content: 'Press Enter to Start';
   position: absolute;
