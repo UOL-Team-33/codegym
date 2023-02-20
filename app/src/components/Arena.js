@@ -38,6 +38,7 @@ const Arena = ({
             if (currentKey === 'Escape') {
                 setReady(GameState.Ready)
                 onGameStateChange(GameState.Ready)
+                return;
             }
 
             let index = currentCharIndex
