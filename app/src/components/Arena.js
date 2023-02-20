@@ -136,13 +136,36 @@ const Arena = ({
         );
     };
 
+    const getGameStateClass = (game_state) => {
+        switch (game_state) {
+            case GameState.Ready:
+                return 'gamestate-ready';
+            case GameState.Started:
+                return 'gamestate-started';
+            case GameState.Finished:
+                return 'gamestate-finished';
+            default:
+                return 'gamestate-ready';
+        }
+    };
+
+
     return (
-        <>
-            <pre className={language_map[language]} style={{ fontSize: `${fontSize}px` }}>
-                <code className={language_map[language]} ref={containerRef} dangerouslySetInnerHTML={{ __html: formattedCode }} />
-            </pre>
-            {/*{debug()}*/}
-        </>
+      <>
+        <pre
+          className={language_map[language]
+            + " " + getGameStateClass(ready)
+        }
+          style={{ fontSize: `${fontSize}px` }}
+        >
+          <code
+            className={language_map[language]}
+            ref={containerRef}
+            dangerouslySetInnerHTML={{ __html: formattedCode }}
+          />
+        </pre>
+        {/*{debug()}*/}
+      </>
     );
 
 
