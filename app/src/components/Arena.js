@@ -32,7 +32,7 @@ const Arena = ({
 
         if (ready === GameState.Started) {
             if (['Shift', 'Alt', 'AltGraph', 'Control', 'ContextMenu',
-                'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(currentKey)) {
+                'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Meta'].includes(currentKey)) {
                 return;
             }
             if (currentKey === 'Escape') {
