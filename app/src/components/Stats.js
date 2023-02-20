@@ -10,7 +10,7 @@ const Stats = ({ ready, stats }) => {
         let intervalId = null
 
         if (ready) {
-            const intervalId = setInterval(() => {
+            intervalId = setInterval(() => {
                 let time = elapsedTime
                 console.log(elapsedTime)
                 setElapsedTime((prevElapsedTime) => prevElapsedTime + 1);
@@ -22,7 +22,7 @@ const Stats = ({ ready, stats }) => {
     useEffect(() => {
         setAccuracy(stats_accuracy())
         setProgress(stats_progress())
-    }, [stats]);
+    }, [stats, elapsedTime]);
 
     const formatTime = (time) => {
         const minutes = Math.floor(time / 60);
@@ -37,7 +37,7 @@ const Stats = ({ ready, stats }) => {
     };
 
     const stats_progress = () => {
-        let progress = Math.floor((stats.charsTypedLength / Math.ceil(elapsedTime / 60 )).toFixed(2));
+        let progress = Math.floor((stats.charsTypedLength / elapsedTime) * 60);
 
         if (isNaN(progress)) return 0
         return progress;
