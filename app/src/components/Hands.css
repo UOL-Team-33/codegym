@@ -1,0 +1,180 @@
+/* .hands {
+    display: flex;
+    align-items: center;
+  }
+  
+  .left-hand, .right-hand {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .finger {
+    width: 10px;
+    height: 30px;
+    background-color: transparent;
+    margin-bottom: 5px;
+  }
+  
+  .left-pinkie .left-hand .pinkie,
+  .left-ring .left-hand .ring,
+  .left-middle .left-hand .middle,
+  .left-index .left-hand .index,
+  .left-thumb .left-hand .thumb,
+  .right-pinkie .right-hand .pinkie,
+  .right-ring .right-hand .ring,
+  .right-middle .right-hand .middle,
+  .right-index .right-hand .index,
+  .right-thumb .right-hand .thumb{
+    background-color: #ffa600;
+  }
+   */
+
+.both-hands {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.left-hand {
+    margin-right: 20px;
+}
+
+.right-hand {
+    margin-left: 20px;
+}
+
+.left-hand,
+.right-hand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.fingers {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    width: 85px;
+    height: 100px;
+    /* background: rgb(113, 113, 113); */
+    transition: background 0.5s;
+}
+.palm {
+    height: 40px;
+    width: 85px;
+    background: rgb(171, 171, 171);
+    border-radius: 0px 0px 10px 10px;
+    /* box-shadow: 2px 2px 2px #ccc; */
+    border-width: 1px;
+    border-color: rgba(205, 205, 205, 0.8);
+    border-style: solid;
+    border-top: none;
+
+}
+
+.finger {
+    width: 20px;
+    background-color: transparent;
+    border-radius: 15px 15px 0px 0px;
+    transition: background 0. 5s;
+    border-width: 1px;
+    border-color: rgba(205, 205, 205, 0.8);
+    border-style: solid;
+    border-bottom: none;
+}
+
+.pinkie {
+    /* background-color: #cb79df; */
+    height: 70px;
+}
+
+.ring {
+    /* background-color: #2fb4e4; */
+    height: 95px;
+}
+
+.middle {
+    /* background-color: #e1a631; */
+    height: 100px;
+}
+
+.index {
+    /* background-color: #52ea8e; */
+    height: 90px;
+}
+
+.thumb {
+    /* background-color: #e87e63; */
+    height: 60px;
+}
+
+/* .left-hand .pinkie {
+    border-radius: 25px 25px 0px 50px;
+}
+
+.left-hand .thumb {
+    border-radius: 25px 25px 50px 0px;
+}
+
+.right-hand .pinkie {
+    border-radius: 25px 25px 50px 0px;
+}
+
+.right-hand .thumb {
+    border-radius: 25px 25px 0px 50px;
+} */
+
+.left-pinkie .left-hand .pinkie,
+.left-ring .left-hand .ring,
+.left-middle .left-hand .middle,
+.left-index .left-hand .index,
+.left-thumb .left-hand .thumb,
+.right-pinkie .right-hand .pinkie,
+.right-ring .right-hand .ring,
+.right-middle .right-hand .middle,
+.right-index .right-hand .index,
+.right-thumb .right-hand .thumb {
+    background-color: #ffa600;
+}
+
+
+.keyboard {
+    margin-top: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.keyboard-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.key {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.key-Enter {
+    width: 4vw;
+}
+.key-CapsLock {
+    width: 5vw;
+}
+.key-Space {
+    width: 20vw;
+}
