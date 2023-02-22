@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Col, Container, Row} from "react-bootstrap";
+import {GameState} from "./constants";
 
 const Stats = ({ ready, stats }) => {
     const [elapsedTime, setElapsedTime] = useState(0);
@@ -10,19 +11,29 @@ const Stats = ({ ready, stats }) => {
         let intervalId = null
 
         if (ready) {
-            intervalId = setInterval(() => {
-                let time = elapsedTime
-                console.log(elapsedTime)
-                setElapsedTime((prevElapsedTime) => prevElapsedTime + 1);
-            }, 1100);
+            if (ready === GameState.Started)
+            {
+                intervalId = setInterval(() => {
+                    let time = elapsedTime;
+                    console.log("this is" + elapsedTime);
+                    setElapsedTime((prevElapsedTime) => prevElapsedTime + 1);
+                }, 1100);
+            }
+            if (ready === GameState.Finished)
+            {
+                clearInterval(setElapsedTime(0));
+            }
         }
         return () => clearInterval(intervalId);
-    }, [ready]);
+    }, [ready,setElapsedTime]);
 
+    
+    
+    
     useEffect(() => {
         setAccuracy(stats_accuracy())
         setProgress(stats_progress())
-    }, [stats, elapsedTime]);
+    }, [stats]);
 
     const formatTime = (time) => {
         const minutes = Math.floor(time / 60);
@@ -37,7 +48,7 @@ const Stats = ({ ready, stats }) => {
     };
 
     const stats_progress = () => {
-        let progress = Math.floor((stats.charsTypedLength / elapsedTime) * 60);
+        let progress = Math.floor((stats.charsTypedLength / Math.ceil(elapsedTime / 60 )).toFixed(2));
 
         if (isNaN(progress)) return 0
         return progress;
@@ -59,7 +70,7 @@ const Stats = ({ ready, stats }) => {
                                   {accuracy}% ACC
                               </div>
                           </div>
-
+                         
                       </div>
                   </Col>
               </Row>

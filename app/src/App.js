@@ -1,21 +1,41 @@
+// Importing CSS files
 import './App.css';
 import "./css/prism.css";
+import Prism from 'prismjs';
+
+
+// Importing React components and functions
 import Stats from "./components/Stats";
 import Arena from "./components/Arena";
 import React, {useEffect, useState} from "react";
+
+// Importing constants
 import {GameState, LANGUAGES} from "./components/constants";
+
+// Importing helper functions
 import {loadFile} from "./components/helpers/loadCode";
+
+// Importing Bootstrap components
 import {Button, Col, Container, Form, InputGroup, Row} from "react-bootstrap";
 
+// let code = `const highlight = (code, errorIndex = -1) => {
+//   const highlightedCode = Prism.highlight(code, Prism.languages.javascript, 'javascript');
+//   if (errorIndex !== -1) {
+//     const splitCode = highlightedCode.split("");
+//     return splitCode.join("");
+//   }
+//   return highlightedCode;
+// };`
 
 let code = `const highlight = (code, errorIndex = -1) => {
-  const highlightedCode = Prism.highlight(code, Prism.languages.javascript, 'javascript');
-  if (errorIndex !== -1) {
-    const splitCode = highlightedCode.split("");
-    return splitCode.join("");
-  }
-  return highlightedCode;
-};`
+    const highlightedCode = Prism.highlight(code, Prism.languages.javascript, 'javascript');
+    if (errorIndex !== -1) {
+      const splitCode = highlightedCode.split("");
+      return splitCode.join("");
+    }
+    return highlightedCode;
+  };`;
+  
 
 code = 'let a = (a,b) => a + b'
 
@@ -134,7 +154,13 @@ const App = () => {
     };
 
 
+    const [displayText, setDisplayText] = useState("");
+    const handleButtonClick = () => {
+        setDisplayText("Press 'Enter' to start typing! Press 'esc' to stop typing");   
+      };
+
     return (
+        
     <div className={"code-gym " + (darkUiActive? "dark": "light") +" d-flex flex-column justify-content-between align-items-stretch vh-100"}>
 
         <Container className="code-navbar">
@@ -221,8 +247,14 @@ const App = () => {
                 ></Arena>
             </Container>
         </Container>
-        {/*<footer  style={{height: '80px', color:'white', background: '#151515'}}>*/}
-        {/*</footer>*/}
+        <footer style={{height: '80px', margin: '50px', color: 'gray', wordBreak: 'break-all'}}>
+           <div style={{margin:'3%', fontSize: '18px', textAlign: 'center'}}>
+                            <p>enter = start typing | esc = stop typing </p>
+                           
+                          
+            </div>
+        </footer>
+
     </div>
   );
 }
