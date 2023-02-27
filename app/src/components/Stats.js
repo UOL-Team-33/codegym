@@ -12,7 +12,7 @@ const Stats = ({ ready, stats }) => {
     if (ready) {
       intervalId = setInterval(() => {
         let time = elapsedTime;
-        console.log(elapsedTime);
+        // console.log(elapsedTime);
         setElapsedTime(prevElapsedTime => prevElapsedTime + 1);
       }, 1100);
     }

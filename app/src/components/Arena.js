@@ -54,7 +54,9 @@ const Arena = ({
 
       if (currentKey === 'Escape') {
         setReady(GameState.Ready);
+        // setReady(GameState.Finished);
         onGameStateChange(GameState.Ready);
+        // onGameStateChange(GameState.Finished);
         return;
       }
 

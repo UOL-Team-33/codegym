@@ -7,6 +7,18 @@ import { GameState, LANGUAGES } from './components/constants';
 import { loadFile } from './components/helpers/loadCode';
 import { Button, Col, Container, Form, InputGroup, Row } from 'react-bootstrap';
 
+// Pre load styles so that we can easily switch between them later
+// Reference: https://stackoverflow.com/questions/66531412/dynamically-load-and-unload-content-of-css-file-in-javascript-react
+
+// eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
+import prismCSS from '!css-loader!prismjs/themes/prism.css';
+// eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
+import okaidiaCSS from '!css-loader!prismjs/themes/prism-okaidia.css';
+// eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
+import tomorrowCSS from '!css-loader!prismjs/themes/prism-tomorrow.css';
+// eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
+import twilightCSS from '!css-loader!prismjs/themes/prism-twilight.css';
+
 let code = `const highlight = (code, errorIndex = -1) => {
   const highlightedCode = Prism.highlight(code, Prism.languages.javascript, 'javascript');
   if (errorIndex !== -1) {
@@ -47,7 +59,6 @@ const App = () => {
   const handleThemeChange = event => {
     const selectedTheme = event.target.value;
     setTheme(selectedTheme);
-    import(`prismjs/themes/${selectedTheme}.css`);
   };
 
   const handleFontSizeChange = event => {
@@ -110,6 +121,29 @@ const App = () => {
       document.body.classList.remove('ui-dark');
     }
   }, [stats]);
+
+  // Updates code theme style element based on selected theme value
+  useEffect(() => {
+    const codeThemeEl = document.getElementById('code-theme');
+    if (codeThemeEl) {
+      switch (theme) {
+        case 'prism':
+          codeThemeEl.innerHTML = prismCSS.toString();
+          break;
+        case 'prism-okaidia':
+          codeThemeEl.innerHTML = okaidiaCSS.toString();
+          break;
+        case 'prism-tomorrow':
+          codeThemeEl.innerHTML = tomorrowCSS.toString();
+          break;
+        case 'prism-twilight':
+          codeThemeEl.innerHTML = twilightCSS.toString();
+          break;
+        default:
+          codeThemeEl.innerHTML = tomorrowCSS.toString();
+      }
+    }
+  }, [theme]);
 
   const get_game_state = game_state => {
     switch (game_state) {
@@ -245,6 +279,7 @@ const App = () => {
         }
         fluid>
         <Container>
+          <style id='code-theme'></style>
           <Arena
             key={arenaKey}
             gameState={gameState}
