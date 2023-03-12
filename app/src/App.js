@@ -173,7 +173,7 @@ const App = () => {
             <Row>
               <Col className='code-navbar-file'>
                 <InputGroup size='sm'>
-                  <InputGroup.Text>
+                  <InputGroup.Text title='Select a code file'>
                     <span className='material-symbols-sharp'>publish</span>
                   </InputGroup.Text>
                   <Form.Control
@@ -186,7 +186,7 @@ const App = () => {
               </Col>
               <Col className='code-navbar-font'>
                 <InputGroup size='sm'>
-                  <InputGroup.Text>
+                  <InputGroup.Text title='Adjust font size'>
                     <span className='material-symbols-sharp'>format_size</span>
                   </InputGroup.Text>
                   <Form.Select
@@ -205,7 +205,7 @@ const App = () => {
               </Col>
               <Col className='code-navbar-theme'>
                 <InputGroup size='sm'>
-                  <InputGroup.Text>
+                  <InputGroup.Text title='Select a theme'>
                     <span className='material-symbols-sharp'>palette</span>
                   </InputGroup.Text>
                   <Form.Select
@@ -223,7 +223,7 @@ const App = () => {
               </Col>
               <Col className='code-navbar-language'>
                 <InputGroup size='sm'>
-                  <InputGroup.Text>
+                  <InputGroup.Text title='Select a language'>
                     <span className='material-symbols-sharp'>language</span>
                   </InputGroup.Text>
                   <Form.Select

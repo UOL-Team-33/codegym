@@ -175,6 +175,7 @@ const Arena = ({
 
   return (
     <>
+      {ready === GameState.Started && <p className='info-stop'>Press Esc to stop.</p>}
       <pre
         className={language_map[language] + ' ' + getGameStateClass(ready)}
         style={{ fontSize: `${fontSize}px` }}>

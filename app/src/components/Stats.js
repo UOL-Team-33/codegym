@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Tooltip, OverlayTrigger } from 'react-bootstrap';
 
 const Stats = ({ ready, stats }) => {
   const [elapsedTime, setElapsedTime] = useState(0);
@@ -23,7 +23,7 @@ const Stats = ({ ready, stats }) => {
   useEffect(() => {
     setAccuracy(stats_accuracy());
   }, [stats]);
-  
+
   // Updates progress with timer change
   useEffect(() => {
     setProgress(stats_progress());
@@ -60,8 +60,21 @@ const Stats = ({ ready, stats }) => {
           <div className='d-flex align-items-center flex-column justify-content-center'>
             <div className='stats-timer'>{formatTime(elapsedTime)}</div>
             <div className='d-flex align-items-center justify-content-around w-100'>
-              <div className='stats-wpm'>{progress} CPM</div>
-              <div className='stats-accuracy'>{accuracy}% ACC</div>
+              <OverlayTrigger
+                overlay={
+                  <Tooltip id='tooltip-cpm'>Characters per minute</Tooltip>
+                }
+                placement='bottom'>
+                <div className='stats-wpm'>{progress} CPM</div>
+              </OverlayTrigger>
+
+              <OverlayTrigger
+                overlay={
+                  <Tooltip id='tooltip-acc'>Accuracy</Tooltip>
+                }
+                placement='bottom'>
+                <div className='stats-accuracy'>{accuracy}% ACC</div>
+              </OverlayTrigger>
             </div>
           </div>
         </Col>
