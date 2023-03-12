@@ -1,4 +1,3 @@
-import './App.css';
 import './css/prism.css';
 import Stats from './components/Stats';
 import Arena from './components/Arena';
@@ -165,110 +164,106 @@ const App = () => {
   };
 
   return (
-    <div
-      className={
-        'code-gym ' +
-        (darkUiActive ? 'dark' : 'light') +
-        ' d-flex flex-column justify-content-between align-items-stretch vh-100'
-      }>
+    <div className={'code-gym ' + (darkUiActive ? 'dark' : 'light')}>
       <Container className='code-navbar'>
-        <Row className='d-flex flex-row align-items-center justify-content-between h-100'>
-          <Col className='code-navbar-logo flex-grow-0'>CODE GYM</Col>
+        <Row className=''>
+          <Col className='code-navbar-logo'>CODE GYM</Col>
 
-          <Col className='code-navbar-settings d-flex justify-content-end'>
-            <Col className='code-navbar-file flex-grow-0'>
-              <InputGroup size='sm'>
-                <InputGroup.Text>
-                  <span className='material-symbols-sharp'>publish</span>
-                </InputGroup.Text>
-                <Form.Control
-                  id='file-upload'
-                  onChange={handleFileUpload}
-                  type='file'
+          <Col className='code-navbar-settings'>
+            <Row>
+              <Col className='code-navbar-file'>
+                <InputGroup size='sm'>
+                  <InputGroup.Text title='Select a code file'>
+                    <span className='material-symbols-sharp'>publish</span>
+                  </InputGroup.Text>
+                  <Form.Control
+                    id='file-upload'
+                    onChange={handleFileUpload}
+                    type='file'
+                    size='sm'
+                  />
+                </InputGroup>
+              </Col>
+              <Col className='code-navbar-font'>
+                <InputGroup size='sm'>
+                  <InputGroup.Text title='Adjust font size'>
+                    <span className='material-symbols-sharp'>format_size</span>
+                  </InputGroup.Text>
+                  <Form.Select
+                    id='font-select'
+                    value={fontSize}
+                    onChange={handleFontSizeChange}
+                    aria-label='Default select example'
+                    size='sm'>
+                    <option value='16'>16</option>
+                    <option value='18'>18</option>
+                    <option value='20'>20</option>
+                    <option value='22'>22</option>
+                    <option value='24'>24</option>
+                  </Form.Select>
+                </InputGroup>
+              </Col>
+              <Col className='code-navbar-theme'>
+                <InputGroup size='sm'>
+                  <InputGroup.Text title='Select a theme'>
+                    <span className='material-symbols-sharp'>palette</span>
+                  </InputGroup.Text>
+                  <Form.Select
+                    id='theme-select'
+                    value={theme}
+                    onChange={handleThemeChange}
+                    aria-label='Default select example'
+                    size='sm'>
+                    <option value='prism'>Prism</option>
+                    <option value='prism-okaidia'>Okaidia</option>
+                    <option value='prism-tomorrow'>Tomorrow</option>
+                    <option value='prism-twilight'>Twilight</option>
+                  </Form.Select>
+                </InputGroup>
+              </Col>
+              <Col className='code-navbar-language'>
+                <InputGroup size='sm'>
+                  <InputGroup.Text title='Select a language'>
+                    <span className='material-symbols-sharp'>language</span>
+                  </InputGroup.Text>
+                  <Form.Select
+                    id='language-select'
+                    value={language}
+                    onChange={handleLanguageChange}
+                    aria-label='Default select example'
+                    size='sm'>
+                    <option value='javascript'>JavaScript</option>
+                    <option value='python'>Python</option>
+                  </Form.Select>
+                </InputGroup>
+              </Col>
+              <Col className='code-navbar-ui'>
+                {/*<Button className='material-icons '  size='sm' onClick={handleDarkUiActiveChange} variant={darkUiActive? 'light': 'dark'}>{darkUiActive ? "Light UI" : "Dark UI"}</Button>*/}
+                <Button
                   size='sm'
-                />
-              </InputGroup>
-            </Col>
-            <Col className='code-navbar-font flex-grow-0'>
-              <InputGroup size='sm'>
-                <InputGroup.Text>
-                  <span className='material-symbols-sharp'>format_size</span>
-                </InputGroup.Text>
-                <Form.Select
-                  id='font-select'
-                  value={fontSize}
-                  onChange={handleFontSizeChange}
-                  aria-label='Default select example'
-                  size='sm'>
-                  <option value='16'>16</option>
-                  <option value='18'>18</option>
-                  <option value='20'>20</option>
-                  <option value='22'>22</option>
-                  <option value='24'>24</option>
-                </Form.Select>
-              </InputGroup>
-            </Col>
-            <Col className='code-navbar-theme flex-grow-0'>
-              <InputGroup size='sm'>
-                <InputGroup.Text>
-                  <span className='material-symbols-sharp'>palette</span>
-                </InputGroup.Text>
-                <Form.Select
-                  id='theme-select'
-                  value={theme}
-                  onChange={handleThemeChange}
-                  aria-label='Default select example'
-                  size='sm'>
-                  <option value='prism'>Prism</option>
-                  <option value='prism-okaidia'>Okaidia</option>
-                  <option value='prism-tomorrow'>Tomorrow</option>
-                  <option value='prism-twilight'>Twilight</option>
-                </Form.Select>
-              </InputGroup>
-            </Col>
-            <Col className='code-navbar-language flex-grow-0'>
-              <InputGroup size='sm'>
-                <InputGroup.Text>
-                  <span className='material-symbols-sharp'>language</span>
-                </InputGroup.Text>
-                <Form.Select
-                  id='language-select'
-                  value={language}
-                  onChange={handleLanguageChange}
-                  aria-label='Default select example'
-                  size='sm'>
-                  <option value='javascript'>JavaScript</option>
-                  <option value='python'>Python</option>
-                </Form.Select>
-              </InputGroup>
-            </Col>
-            <Col className='code-navbar-ui flex-grow-0'>
-              {/*<Button className='material-icons '  size='sm' onClick={handleDarkUiActiveChange} variant={darkUiActive? 'light': 'dark'}>{darkUiActive ? "Light UI" : "Dark UI"}</Button>*/}
-              <Button
-                size='sm'
-                onClick={handleDarkUiActiveChange}
-                variant={darkUiActive ? 'light' : 'dark'}>
-                {darkUiActive ? (
-                  <span
-                    style={{ fontSize: '18px' }}
-                    className='material-symbols-sharp'>
-                    light_mode
-                  </span>
-                ) : (
-                  <span
-                    style={{ fontSize: '18px' }}
-                    className='material-symbols-sharp'>
-                    dark_mode
-                  </span>
-                )}
-              </Button>
-            </Col>
+                  onClick={handleDarkUiActiveChange}
+                  variant={darkUiActive ? 'light' : 'dark'}>
+                  {darkUiActive ? (
+                    <span
+                      style={{ fontSize: '18px' }}
+                      className='material-symbols-sharp'>
+                      light_mode
+                    </span>
+                  ) : (
+                    <span
+                      style={{ fontSize: '18px' }}
+                      className='material-symbols-sharp'>
+                      dark_mode
+                    </span>
+                  )}
+                </Button>
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Container>
       <Container
-        className={'stats-container ' + (darkUiActive ? 'dark' : 'light')}
-        fluid>
+        className={'stats-container ' + (darkUiActive ? 'dark' : 'light')}>
         <Stats ready={gameState} stats={stats}></Stats>
       </Container>
       <Container
