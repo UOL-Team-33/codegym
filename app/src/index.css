@@ -17,8 +17,12 @@
 }
 
 @keyframes blink {
-  0% { background-color: rgba(155,155,155,0.9); }
-  100% { background-color: rgba(155,155,155,0); }
+  0% {
+    background-color: rgba(155, 155, 155, 0.9);
+  }
+  100% {
+    background-color: rgba(155, 155, 155, 0);
+  }
 }
 
 .overlay {
@@ -42,21 +46,26 @@
 }
 
 @keyframes intro {
-  0% { color: lightgray; }
-  50% { color: lightyellow; }
-  100% { color: lightgray; }
+  0% {
+    color: lightgray;
+  }
+  50% {
+    color: lightyellow;
+  }
+  100% {
+    color: lightgray;
+  }
 }
 
 #debug {
   margin-top: 200px;
   background: white;
-  padding:20px;
+  padding: 20px;
   color: black;
 }
 
-
-code[class*="language-"],
-pre[class*="language-"] {
+code[class*='language-'],
+pre[class*='language-'] {
   text-shadow: none !important;
 }
 .token.operator {
@@ -65,6 +74,7 @@ pre[class*="language-"] {
 
 .code-gym {
   font-family: 'Source Code Pro', monospace !important;
+  padding-top: 40px;
 }
 
 .code-gym.dark {
@@ -76,7 +86,6 @@ pre[class*="language-"] {
   color: #151515;
 }
 
-
 .stats-container {
   padding: 0;
   margin: 0;
@@ -86,12 +95,12 @@ pre[class*="language-"] {
 .code-container {
   height: auto;
   min-height: 200px;
-  padding: 50px 0;
+  padding: 20px 0;
 }
 
 .code-container pre {
-  border-radius: 0.5em;
-  border: .3em solid hsl(0, 0%, 33%)
+  border-radius: 10px;
+  /* border: 0.3em solid hsl(0, 0%, 33%); */
 }
 
 code.gamestate-ready {
@@ -107,8 +116,13 @@ pre.gamestate-ready::after {
   transform: translate(-50%, -50%);
   font-size: 3em;
   font-weight: 900;
-  color: #5A5A5A;
   letter-spacing: -5px;
+}
+
+/* Override Prismjs <pre> css */
+:not(pre) > code[class*='language-'],
+pre[class*='language-'] {
+  background: none;
 }
 
 .code-gym.light select.form-select {
@@ -118,56 +132,63 @@ pre.gamestate-ready::after {
   padding-right: 1em;
   background-color: #151515;
   border: 1px solid #202020;
-  color: #C6C6C6;
+  color: #efefef;
 }
 
-.code-gym input[type=file]::file-selector-button {
+.code-gym input[type='file']::file-selector-button {
   display: none;
 }
 
 .code-gym.dark input#file-upload.form-control {
   background-color: #151515;
   border: 1px solid #202020;
-  color: #C6C6C6;
+  color: #efefef;
 }
 
 .code-gym.dark span.input-group-text {
   background-color: #494949;
-  color: #C6C6C6;
+  color: #efefef;
   font-weight: bold;
   border: 1px solid #202020;
 }
 
 .code-navbar {
-  height: 100px;
-  margin-top: 50px;
   border-radius: 10px;
+  padding: 10px;
 }
 
 .code-gym.dark .code-navbar {
-  background: #1E1E1E;
+  background: #1e1e1e;
 }
 .code-gym.light .code-navbar {
   background: #e5e2df;
 }
 
 .code-navbar-logo {
-  flex-basis: 7% !important;
   font-weight: 800;
   font-size: 1.4em;
   line-height: 110%;
-  margin-left: 5px;
-  color: #C6C6C6;
 }
 
 :root {
   --setting-items-margin: 10px;
 }
 
-
 .code-navbar-settings {
   flex-basis: 80% !important;
 }
+
+.code-navbar-settings .row {
+  justify-content: end;
+  align-items: center;
+  height: 100%;
+}
+
+.code-navbar-settings .col {
+  flex-grow: 0 !important;
+  cursor: pointer;
+}
+
 .code-navbar-file {
   flex-basis: 180px !important;
   margin-right: var(--setting-items-margin);
@@ -190,7 +211,7 @@ pre.gamestate-ready::after {
 }
 .code-navbar-ui button {
   background-color: #494949;
-  color: #C6C6C6;
+  color: #efefef;
   font-weight: bold;
   border: 1px solid #202020;
   padding-top: 6px;
@@ -209,18 +230,18 @@ pre.gamestate-ready::after {
 }
 
 .stats-timer {
-  font-size: 8em;
+  font-size: 6rem;
   font-weight: 900;
-  color: #5A5A5A;
+  color: #efefef;
   letter-spacing: -5px;
 }
 .stats-wpm {
-  font-size: 2em;
+  font-size: 2rem;
   font-weight: 900;
-  color: #5A5A5A;
+  color: #efefef;
 }
 .stats-accuracy {
-  font-size: 2em;
+  font-size: 2rem;
   font-weight: 900;
-  color: #5A5A5A;
+  color: #efefef;
 }
